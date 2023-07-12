@@ -206,3 +206,24 @@ class Rrfs:
     def make_dataframe(self,forecasts):
         df = xr.concat(forecasts, "time")
         return df 
+    
+    def download_outputs(self,initialization_date, forecast_hour):
+        init_hour_str = initialization_date.strftime("%H")      #S3 init hour
+        init_date_str = initialization_date.strftime("%Y%m%d")  #S3 init_date 
+
+        file_name = self.make_model_file_name(init_hour_str,forecast_hour)
+        # Path and file name for the cache level
+        download_path = self.cache.get_download_path()
+        # Cache file name
+        cfile_name = self.cache.get_cfile_name(file_name, init_date_str, init_hour_str)
+        # S3 bucket file name
+        try :
+            object_name = self.make_s3_object_name(file_name, init_date_str, init_hour_str)
+            #Downloads file from bucket and writes it to the download path with c_file_name as filename
+            self.s3_connection.download_file(object_name, download_path, cfile_name)
+            #Returns cached data as xarray dataset
+            # ds = self.cache.fetch(file_name, init_date_str, init_hour_str)
+
+        except: 
+            print(f'Failed to download file {file_name} from bucket {bucket}')
+        return 
