@@ -1,6 +1,6 @@
 import xarray as xr
-from S3 import s3
-from Cache import cache
+from .S3 import s3
+from .Cache import cache
 from shapely import Point
 
 #Receive variable from somewhere else
