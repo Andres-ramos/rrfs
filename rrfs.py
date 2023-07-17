@@ -161,8 +161,12 @@ class Rrfs:
                 )
         data_vars = {}
         for weather_var in variable_list:
-            data_vars[weather_var] = (["ygrid_0", "xgrid_0"], ds[weather_var].data)
-
+            if weather_var == "MXUPHL_P8_2L103_GLC0_max1h":
+                data_vars["MXUPHL03_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
+                data_vars["MXUPHL25_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][1].data)
+            else :
+                data_vars[weather_var] = (["ygrid_0", "xgrid_0"], ds[weather_var].data)
+        
         ds = xr.Dataset(data_vars=data_vars, coords=coords)
         return ds 
         #Filters the dataset to only contain grid points inside the bounding box
