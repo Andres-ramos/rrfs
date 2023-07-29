@@ -112,8 +112,16 @@ class Hrrr:
             if weather_var == "MXUPHL_P8_2L103_GLC0_max1h":
                 data_vars["MXUPHL03_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
                 data_vars["MXUPHL25_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][1].data)
+            elif weather_var == "VGRD_P0_L103_GLC0":
+                data_vars["VGRD_P0_L103_GLC0"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
+
+            elif weather_var == "UGRD_P0_L103_GLC0":
+                data_vars["UGRD_P0_L103_GLC0"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
             else :
                 data_vars[weather_var] = (["ygrid_0", "xgrid_0"], ds[weather_var].data)
+            
+            # if weather_var == "UGRD_P0_L103_GLC0"
+            #     data_vars["MXUPHL03_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
         
         ds = xr.Dataset(data_vars=data_vars, coords=coords)
         return ds 
