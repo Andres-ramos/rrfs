@@ -1,6 +1,6 @@
 import xarray as xr
-from S3 import s3
-from Cache import cache
+from .S3 import s3
+from .Cache import cache
 from shapely import Point
 
 cache_name="hrrr_store"
@@ -24,7 +24,7 @@ class Hrrr:
             forecast_hour = forecast_hours
             return self.fetch_model_output(initialization_date, forecast_hour, bounding_box, variable_list)
 
-        #If the forecasts hours are a list
+        #If the forecasts hours are a list  
         elif type(forecast_hours) == list:
             #Opens each forecast and appends to list
             for hour in forecast_hours:
