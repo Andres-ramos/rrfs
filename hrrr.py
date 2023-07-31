@@ -110,8 +110,8 @@ class Hrrr:
         data_vars = {}
         for weather_var in variable_list:
             if weather_var == "MXUPHL_P8_2L103_GLC0_max1h":
-                data_vars["MXUPHL03_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
-                data_vars["MXUPHL25_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][1].data)
+                data_vars["MXUPHL03_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][1].data)
+                data_vars["MXUPHL25_P8_2L103_GLC0_max1h"] = (["ygrid_0", "xgrid_0"], ds[weather_var][2].data)
             elif weather_var == "VGRD_P0_L103_GLC0":
                 data_vars["VGRD_P0_L103_GLC0"] = (["ygrid_0", "xgrid_0"], ds[weather_var][0].data)
 
